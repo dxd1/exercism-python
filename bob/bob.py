@@ -2,11 +2,12 @@ import re
 
 def hey(what):
     what = what.strip()
+    r = re.compile(r'[^\W\d_]', re.UNICODE)
     answer = 'Whatever.'
-    if re.search(r'\p{L}', what) and what == what.upper():
+    if r.search(what) and what == what.upper():
         answer = 'Whoa, chill out!'
     elif what.endswith('?'):
         answer = 'Sure.'
-    elif re.match('^\s+?', what):
+    elif re.match(r'\s+', what) or what == '':
         answer = 'Fine. Be that way!'
     return answer

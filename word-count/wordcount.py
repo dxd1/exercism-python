@@ -1,24 +1,26 @@
 import unicodedata
+from collections import defaultdict
 
 def word_count(text):
-    dict = {}
+    counter = defaultdict(lambda: 0)
+    for word in word_split(text):
+        counter[word]+=1
+    return dict(counter)
+
+def word_split(text):
+    words = []
     word = ''
     for char in decode_if_needed(text.lower()):
         category = unicodedata.category(char)
         if(category == 'Ll' or category == 'Nd'):
             word += char
         else:
-            dict = add_dict(word, dict)
+            if word != '':
+                words.append(word)
             word = ''
-    return add_dict(word, dict)
-
-def add_dict(word, dict):
     if word != '':
-        if word in dict:
-            dict[word] += 1
-        else:
-            dict[word] = 1
-    return dict
+        words.append(word)
+    return words
 
 def decode_if_needed(string):
     try:
