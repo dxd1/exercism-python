@@ -4,7 +4,7 @@ class School:
 
     def __init__(self, name):
         self.name = name
-        self.db =  defaultdict(lambda: set())
+        self.db =  defaultdict(set)
 
     def add(self, name, grade):
         self.db[grade].add(name)
@@ -13,5 +13,4 @@ class School:
         return self.db[grade]
 
     def sort(self):
-        for grade in self.db:
-            yield (grade, tuple(sorted(self.db[grade])))
+        return ((grade, tuple(sorted(self.db[grade]))) for grade in self.db)
