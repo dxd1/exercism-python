@@ -13,4 +13,4 @@ class School:
         return self.db[grade]
 
     def sort(self):
-        return ((grade, tuple(sorted(self.db[grade]))) for grade in self.db)
+        return ((grade, tuple(sorted(value))) for (grade, value) in self.db.items())
